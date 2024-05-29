@@ -1,4 +1,5 @@
-import Recipe from '../models/recipe.js'
+import Recipe from '../models/recipe.js';
+import User from '../models/user.js';
 
 // Create a new recipe
 export const createRecipe = async (req, res) => {
@@ -19,6 +20,38 @@ export const getAllRecipes = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Save a recipe
+export const saveRecipe = async (res, req) => {
+  try {
+
+      const recipe = await Recipe.findById(req.params.id);
+      const user = await User.findById(req.params.id);
+
+      if (!recipe) {
+          return res.status(404).json({ message: 'Recipe not found' });
+      }
+
+      if (!user) {
+          return res.status(404).json({ message: 'User not found' });
+      }
+
+      if (recipe.savedBy.includes(user.id) || user.savedRecipes.includes(recipe.id)) {
+          return res.status(400).json({ message: 'Recipe already saved' });
+      }
+
+      recipe.savedBy.push(user.id);
+      user.savedRecipes.push(recipe.id);
+
+      await recipe.save();
+      await user.save();
+
+      res.json({ message: 'Recipe saved successfully' });
+    } catch (err) {
+      console.error(err);
+      // res.status(500).json({ message: err.message });
+    }
+}
 
 // Get a single recipe by ID
 export const getRecipeById = async (req, res) => {

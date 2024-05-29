@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/recipe', recipe);
-app.use('/user', user)
+app.use('/auth', user)
 
 const CONNECTION_URL = process.env.ATLAS_URI
 const PORT = process.env.PORT || 5001;
