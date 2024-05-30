@@ -5,7 +5,7 @@ import User from '../models/user.js'
 
 export const registerUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email });
@@ -20,7 +20,6 @@ export const registerUser = async (req, res) => {
 
     // Create new user
     user = new User({
-      username,
       email,
       password: hashedPassword
     });
