@@ -34,14 +34,12 @@ const CreateRecipe = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        console.log("Token from localStorage:", localStorage.getItem("access_token"));
-        console.log("userId: " , localStorage.getItem("userID"));
         try {
-            await axios.post("http://localhost:5001/recipe", {
+            const response = await axios.post("http://localhost:5001/recipe/", recipe, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
                 },
-            }, recipe);
+            });
             alert("Recipe created!");
             navigate("/");
         } catch (err) {
