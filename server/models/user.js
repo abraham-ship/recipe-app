@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
   savedRecipes: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Recipe' 
+  }],
+  createdRecipes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Recipe'
   }]
 });
 
