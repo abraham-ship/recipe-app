@@ -23,7 +23,7 @@ const Auth = () => {
                 password,
             });
 
-            if (response.data.token && response.data.userID) {
+            if (response.data.token) {
                 setCookie('access_token', response.data.token, { path: '/' });
                 window.localStorage.setItem('access_token', response.data.token);
                 window.localStorage.setItem('userID', response.data.userID);

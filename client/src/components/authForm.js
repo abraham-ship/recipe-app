@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = ({ email, setEmail, password, setPassword, label, onSubmit }) => {
+const authForm = ({ email, setEmail, password, setPassword, label, onSubmit }) => {
     return (
         <div className="auth-container">
             <form onSubmit={onSubmit}>
@@ -29,4 +29,4 @@ const Form = ({ email, setEmail, password, setPassword, label, onSubmit }) => {
     );
 };
 
-export default Form;
+export default authForm;

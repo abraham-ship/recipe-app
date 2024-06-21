@@ -8,7 +8,7 @@ const useLogout = () => {
     const logout = () => {
         removeCookie('access_token', { path: '/' });
         localStorage.removeItem('userID');
-        navigate('/login');
+        navigate('/auth');
     };
 
     return logout;

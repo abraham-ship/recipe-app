@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useGetUserID } from '../hooks/useGetUserID';
+import '../styles/recipe.css'
 
 const CreateRecipe = () => {
     const userID = useGetUserID();
@@ -35,7 +36,7 @@ const CreateRecipe = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5001/recipe/", recipe, {
+            await axios.post("http://localhost:5001/recipe/", recipe, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
                 },
