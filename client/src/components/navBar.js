@@ -10,7 +10,7 @@ const Navbar = ({ isLoggedIn }) => {
         <div className="navbar">
             <Link to="/">Home</Link>
             {isLoggedIn && <Link to="/create-recipe">Create Recipe</Link>}
-            {isLoggedIn && <Link to="/saved-recipes">Saved Recipes</Link>}
+            {isLoggedIn && <Link to="/saved-recipe">Saved Recipes</Link>}
             {isLoggedIn && <Link to="/update-recipe">My Recipes</Link>}
             {!isLoggedIn ? (
                 <Link to="/auth">Login/Register</Link>

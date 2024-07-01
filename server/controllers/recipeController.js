@@ -5,6 +5,7 @@ import User from '../models/user.js';
 export const createRecipe = async (req, res) => {
   try {
     const newRecipe = await Recipe.create({ ...req.body, createdBy: req.user._id });
+    await User.findByIdAndUpdate(req.user._id, { $push: { createdRecipes: newRecipe._id } });
     res.status(201).json(newRecipe);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -32,10 +33,6 @@ export const saveRecipe = async (res, req) => {
           return res.status(404).json({ message: 'Recipe not found' });
       }
 
-      if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-      }
-
       if (recipe.savedBy.includes(user.id) || user.savedRecipes.includes(recipe.id)) {
           return res.status(400).json({ message: 'Recipe already saved' });
       }
@@ -53,6 +50,36 @@ export const saveRecipe = async (res, req) => {
     }
 }
 
+// unsave a recipe
+export const unsaveRecipe = async (req, res) => {
+  try {
+      const user = await User.findById(req.user.id);
+      user.savedRecipes = user.savedRecipes.filter(
+          (recipeId) => recipeId.toString() !== req.params.id
+      );
+      await user.save();
+      res.status(200).json({ message: 'Recipe unsaved successfully' });
+  } catch (err) {
+      res.status(500).json({ message: err.message });
+  }
+};
+
+// get saved recipes
+export const getSavedRecipes = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    console.log('fetching saved recipes for: ', userId);
+    const user = await User.findById(userId).populate('savedRecipes');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(user.savedRecipes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 // Get a single recipe by ID
 export const getRecipeById = async (req, res) => {
   try {
@@ -63,6 +90,18 @@ export const getRecipeById = async (req, res) => {
     res.json(recipe);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+//get recipes by user
+export const getUserRecipes = async (req, res) => {
+  try {
+      const userId = req.user.id;
+      console.log("fetching recipes for:", userId);
+      const recipes = await Recipe.find({ createdBy: userId });
+      res.json(recipes);
+  } catch (err) {
+      res.status(500).json({ message: err.message });
   }
 };
 
