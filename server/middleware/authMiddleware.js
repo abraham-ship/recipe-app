@@ -8,7 +8,7 @@ const requireAuth = async (req, res, next) => {
 	try {
 		// get id from the payload
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded.user;
+		req.user = decoded.user;
         next();
 
 	} catch(error) {
@@ -17,4 +17,4 @@ const requireAuth = async (req, res, next) => {
 	}
 }
 
-export default requireAuth
+export default requireAuth;

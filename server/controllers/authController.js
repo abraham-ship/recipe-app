@@ -34,7 +34,7 @@ export const registerUser = async (req, res) => {
 
     jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
-      res.json({ token, userID: user.id });
+      res.json({ token, userID: user._id });
     });
   } catch (err) {
     console.error(err.message);
@@ -68,7 +68,7 @@ export const loginUser = async (req, res) => {
 
     jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
-      res.json({ token, userID: user.id });
+      res.json({ token, userID: user._id });
     });
   } catch (err) {
     console.error(err.message);

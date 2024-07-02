@@ -33,7 +33,7 @@ const Home = () => {
                 <h2>{recipe.name}</h2>
                 <img src={recipe.imageUrl} alt={recipe.name} className='recipe-image' />
                 <p>Ingredients: {recipe.ingredients.join(', ')}</p>
-                <p>Instructions: {recipe.instructions.join('. ')}</p>
+                <p>Instructions: {recipe.instructions}</p>
                 <p>Cooking Time: {recipe.cookingTime} minutes</p>
                 {/* <button onClick={() => saveRecipe(recipe._id)}>Save Recipe</button> */}
               </div>
