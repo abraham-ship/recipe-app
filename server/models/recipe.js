@@ -27,6 +27,11 @@ const recipeSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  savedBy: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: 'User',
+    default: [] 
+  }
 });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
