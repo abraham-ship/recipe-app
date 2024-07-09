@@ -9,6 +9,7 @@ router.put('/edit/:id', authMiddleware, updateRecipe);
 router.delete('/:id', authMiddleware, deleteRecipe);
 router.post('/save/:id', authMiddleware, saveRecipe);
 router.get('/user/:id', authMiddleware, getUserRecipes);
+router.get('/:id', authMiddleware, getRecipeById);
 router.post('/unsave/:id', authMiddleware, unsaveRecipe);
 router.get('/user/:id/savedRecipes', authMiddleware, getSavedRecipes);
 

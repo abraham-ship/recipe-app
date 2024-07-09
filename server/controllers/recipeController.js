@@ -5,7 +5,7 @@ import User from '../models/user.js';
 export const createRecipe = async (req, res) => {
   try {
     const newRecipe = await Recipe.create({ ...req.body, createdBy: req.user.id });
-    await User.findByIdAndUpdate(req.user._id, { $push: { createdRecipes: newRecipe._id } });
+    await User.findByIdAndUpdate(req.user.id, { $push: { createdRecipes: newRecipe.id } });
     res.status(201).json(newRecipe);
   } catch (err) {
     res.status(400).json({ message: err.message });
