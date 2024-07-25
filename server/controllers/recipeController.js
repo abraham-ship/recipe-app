@@ -23,66 +23,86 @@ export const getAllRecipes = async (req, res) => {
 };
 
 // Save a recipe
-export const saveRecipe = async (req, res) => {
-  try {
-    const { id: recipeID } = req.params;
-    const userID = req.user.id;
-    console.log('recipe id: ', recipeID)
-    console.log('user id:', userID)
+// export const saveRecipe = async (req, res) => {
+//   try {
+//     const { id: recipeID } = req.params;
+//     const userID = req.user.id;
+//     console.log('recipe id: ', recipeID)
+//     console.log('user id:', userID)
 
-    const recipe = await Recipe.findById(recipeID);
-    const user = await User.findById(userID);
+//     const recipe = await Recipe.findById(recipeID);
+//     const user = await User.findById(userID);
 
-    if (!recipe) {
-        return res.status(404).json({ message: 'Recipe not found' });
-    }
+//     if (!recipe) {
+//         return res.status(404).json({ message: 'Recipe not found' });
+//     }
 
-    if (recipe.savedBy.includes(userID) || user.savedRecipes.includes(recipeID)) {
-        return res.status(400).json({ message: 'Recipe already saved' });
-    }
+//     if (recipe.savedBy.includes(userID) || user.savedRecipes.includes(recipeID)) {
+//         return res.status(400).json({ message: 'Recipe already saved' });
+//     }
 
-    recipe.savedBy.push(user.id);
-    user.savedRecipes.push(recipe.id);
+//     recipe.savedBy.push(user.id);
+//     user.savedRecipes.push(recipe.id);
 
-    await recipe.save();
-    await user.save();
+//     await recipe.save();
+//     await user.save();
 
-    res.json({ message: 'Recipe saved successfully' });
-    } catch (err) {
-      console.error(err);
-      // res.status(500).json({ message: err.message });
-    }
-}
+//     res.json({ message: 'Recipe saved successfully' });
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ message: err.message });
+//     }
+// }
 
 // unsave a recipe
-export const unsaveRecipe = async (req, res) => {
-  try {
-      const user = await User.findById(req.user.id);
-      user.savedRecipes = user.savedRecipes.filter(
-          (recipeId) => recipeId.toString() !== req.params.id
-      );
-      await user.save();
-      res.status(200).json({ message: 'Recipe unsaved successfully' });
-  } catch (err) {
-      res.status(500).json({ message: err.message });
-  }
-};
+// export const unsaveRecipe = async (req, res) => {
+//   try {
+//     const { userId, recipeId } = req.params;
+
+//     const recipe = await Recipe.findById(recipeId);
+//     const user = await User.findById(userId);
+
+//     if (!recipe) {
+//         return res.status(404).json({ message: 'Recipe not found' });
+//     }
+
+//     // Remove user from recipe's savedBy list
+//     const savedByIndex = recipe.savedBy.indexOf(userId);
+//     if (savedByIndex > -1) {
+//         recipe.savedBy.splice(savedByIndex, 1);
+//     }
+
+//     // Remove recipe from user's savedRecipes list
+//     const savedRecipeIndex = user.savedRecipes.indexOf(recipeId);
+//     if (savedRecipeIndex > -1) {
+//         user.savedRecipes.splice(savedRecipeIndex, 1);
+//     }
+
+//     await recipe.save();
+//     await user.save();
+
+//     res.json({ message: 'Recipe unsaved successfully' });
+//   } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ message: 'Internal server error' });
+//   }
+// };
 
 // get saved recipes
-export const getSavedRecipes = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    console.log('fetching saved recipes for: ', userId);
-    const user = await User.findById(userId).populate('savedRecipes');
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
+// export const getSavedRecipes = async (req, res) => {
+//   try {
+//     const userId = req.user.id;
+//     console.log('fetching saved recipes for: ', userId);
+//     const user = await User.findById(userId).populate('savedRecipes');
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
 
-    res.json(user.savedRecipes);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+//     res.json(user.savedRecipes);
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
 
 // Get a single recipe by ID
 export const getRecipeById = async (req, res) => {

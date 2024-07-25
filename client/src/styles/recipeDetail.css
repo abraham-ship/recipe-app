@@ -1,0 +1,60 @@
+/* Container for the entire recipe detail page */
+.recipe-detail-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-sizing: border-box;
+}
+
+/* The detail card containing the recipe information */
+.recipe-detail {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+/* Title styling */
+.recipe-detail h2 {
+    margin-bottom: 20px;
+}
+
+/* Image styling with max width and max height */
+.recipe-detail img {
+    max-width: 100%;
+    max-height: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    object-fit: cover;
+}
+
+/* Paragraph styling */
+.recipe-detail p {
+    margin: 10px 0;
+}
+
+/* Button styling */
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #0056b3;
+}

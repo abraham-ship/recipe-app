@@ -38,7 +38,7 @@ const CreateRecipe = () => {
     const onSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5001/recipe/", recipe, {
+            await axios.post("http://localhost:5001/recipe/create/", recipe, {
                 headers: {
                     Authorization: `Bearer ${cookies.access_token}`,
                 },

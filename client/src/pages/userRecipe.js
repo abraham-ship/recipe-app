@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useGetUserID } from '../hooks/useGetUserID';
 import { useCookies } from 'react-cookie';
 import '../styles/userRecipe.css';
@@ -9,7 +9,6 @@ const UserRecipes = () => {
     const userID = useGetUserID();
     const [cookies] = useCookies(['access_token']);
     const [recipes, setRecipes] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserRecipes = async () => {
@@ -32,33 +31,9 @@ const UserRecipes = () => {
         }
     }, [userID, cookies]);
 
-    const updateRecipe = async (recipeId) => {
-        if (!cookies.access_token) {
-            alert('You must be logged in to update recipes');
-            navigate('/auth');
-            return;
-        }
-
-        try {
-            await axios.put(
-                `http://localhost:5001/recipe/edit/${recipeId}`,
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${cookies.access_token}`,
-                    },
-                }
-            );
-            alert('Recipe updated successfully!');
-        } catch (err) {
-            console.error('Error updating recipe:', err);
-            alert('Failed to update recipe');
-        }
-    };
-
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:5001/recipe/${id}`, {
+            await axios.delete(`http://localhost:5001/recipe/delete/${id}`, {
                 headers: {
                     Authorization: `Bearer ${cookies.access_token}`,
                 },
@@ -81,8 +56,8 @@ const UserRecipes = () => {
                             <img src={recipe.imageUrl} alt={recipe.name} />
                             <p>{recipe.instructions}</p>
                             <p>Cooking Time: {recipe.cookingTime} minutes</p>
-                            <Link to={`/edit/${recipe._id}`}>Edit</Link>
-                            <button onClick={() => updateRecipe(recipe._id)}>Update Recipe</button>
+                            <Link to={`/update-recipe/${recipe._id}`}>UpdateRecipe</Link>
+
                             <button onClick={() => handleDelete(recipe._id)}>Delete</button>
                         </div>
                     ))

@@ -1,17 +1,13 @@
 import express from 'express';
 const router = express.Router();
 import authMiddleware from '../middleware/authMiddleware.js';
-import {createRecipe, getAllRecipes, getRecipeById, updateRecipe, deleteRecipe, saveRecipe, getUserRecipes, unsaveRecipe, getSavedRecipes} from '../controllers/recipeController.js';
+import {createRecipe, getAllRecipes, getRecipeById, updateRecipe, deleteRecipe, getUserRecipes} from '../controllers/recipeController.js';
 
 // Protected routes
-router.post('/', authMiddleware, createRecipe);
-router.put('/edit/:id', authMiddleware, updateRecipe);
-router.delete('/:id', authMiddleware, deleteRecipe);
-router.post('/save/:id', authMiddleware, saveRecipe);
+router.post('/create', authMiddleware, createRecipe);
+router.put('/update/:id', authMiddleware, updateRecipe);
+router.delete('/delete/:id', authMiddleware, deleteRecipe);
 router.get('/user/:id', authMiddleware, getUserRecipes);
-router.get('/:id', authMiddleware, getRecipeById);
-router.post('/unsave/:id', authMiddleware, unsaveRecipe);
-router.get('/user/:id/savedRecipes', authMiddleware, getSavedRecipes);
 
 // Public routes
 router.get('/', getAllRecipes);

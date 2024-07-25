@@ -1,86 +1,101 @@
+/* Center the form container */
 .create-recipe {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
-.recipe-form h2 {
-    text-align: center;
+/* Form heading styling */
+.create-recipe h2 {
     margin-bottom: 20px;
+    font-size: 2rem;
+    color: #333;
 }
 
-.recipe-form label {
+.recipe-detail p {
+    color: grey;
+    font-size: 24px;
+}
+
+/* Form styling */
+.create-recipe form {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form group styling */
+.create-recipe label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.create-recipe input,
+.create-recipe textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.create-recipe textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button styling */
+.create-recipe button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-recipe button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Add ingredient button styling */
+.create-recipe button[type="button"] {
     display: block;
     margin-top: 10px;
-}
-
-.recipe-form input[type="text"],
-.recipe-form input[type="number"],
-.recipe-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.recipe-form textarea {
-    resize: vertical;
-    height: 100px;
-}
-
-.ingredient-input {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 5px;
-}
-
-.ingredient-input input {
-    flex: 1;
-}
-
-.ingredient-input button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.ingredient-input button:hover {
-    background-color: #c82333;
-}
-
-.recipe-form button[type="button"] {
-    margin-top: 10px;
-    padding: 10px 15px;
+    padding: 8px 16px;
     background-color: #28a745;
-    color: white;
+    color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.recipe-form button[type="button"]:hover {
+.create-recipe button[type="button"]:hover {
     background-color: #218838;
 }
 
-.recipe-form button[type="submit"] {
-    width: 100%;
-    padding: 10px 0;
-    margin-top: 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+/* recipeDetail.css */
+
+.recipe-detail ol {
+    margin: 0;
+    padding-left: 20px;
+    list-style-position: inside; /* Ensures that numbers are aligned with the text */
 }
 
-.recipe-form button[type="submit"]:hover {
-    background-color: #0056b3;
+.recipe-detail li {
+    margin-bottom: 10px;
+    padding-left: 10px; /* Adds space before the instruction text */
 }

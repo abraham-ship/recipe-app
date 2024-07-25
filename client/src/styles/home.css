@@ -14,10 +14,17 @@ h2 {
 }
 
 /* Grid layout for the recipe list */
-.recipe-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+.recipe {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.recipe:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Styling for each recipe card */
@@ -40,7 +47,7 @@ h2 {
 }
 
 /* Styling for the recipe title */
-.recipe-card h3 {
+.recipe-card h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #444;
