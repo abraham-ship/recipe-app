@@ -30,6 +30,7 @@ $ npm run dev
 
 # server-side
 $ npm start
+```
 
 ## Contributing
 
